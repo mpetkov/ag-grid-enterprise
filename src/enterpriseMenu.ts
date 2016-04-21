@@ -286,12 +286,12 @@ export class EnterpriseMenu {
         var builtInMenuOptions: any = {
             pinSubMenu: {
                 name: localeTextFunc('pinColumn', 'Pin Column'),
-                icon: svgFactory.createPinIcon(),
+                icon: _.createIconNoSpan('pin', this.gridOptionsWrapper, null, svgFactory.createPinIcon),
                 childMenu: this.createPinnedSubMenu()
             },
             valueAggSubMenu: {
                 name: localeTextFunc('valueAggregation', 'Value Aggregation'),
-                icon: svgFactory.createAggregationIcon(),
+                icon: _.createIconNoSpan('aggregation', this.gridOptionsWrapper, null, svgFactory.createAggregationIcon),
                 childMenu: this.createAggregationSubMenu()
             },
             autoSizeThis: {
@@ -305,12 +305,12 @@ export class EnterpriseMenu {
             rowGroup: {
                 name: localeTextFunc('groupBy', 'Group by') + ' ' + this.column.getColDef().headerName,
                 action: ()=> this.columnController.addRowGroupColumn(this.column),
-                icon: svgFactory.createGroupIcon12()
+                icon: _.createIconNoSpan('group12', this.gridOptionsWrapper, null, svgFactory.createGroupIcon12)
             },
             rowUnGroup: {
                 name: localeTextFunc('ungroupBy', 'Un-Group by') + ' ' + this.column.getColDef().headerName,
                 action: ()=> this.columnController.removeRowGroupColumn(this.column),
-                icon: svgFactory.createGroupIcon12()
+                icon: _.createIconNoSpan('group12', this.gridOptionsWrapper, null, svgFactory.createGroupIcon12)
             },
             resetColumns: {
                 name: localeTextFunc('resetColumns', 'Reset Columns'),
@@ -400,7 +400,7 @@ export class EnterpriseMenu {
         this.mainMenuList.addEventListener(MenuItemComponent.EVENT_ITEM_SELECTED, this.onHidePopup.bind(this));
 
         this.tabItemGeneral = {
-            title: svgFactory.createMenuSvg(),
+            title: _.createIconNoSpan('menu', this.gridOptionsWrapper, null, svgFactory.createMenuSvg),
             body: this.mainMenuList.getGui()
         };
     }
@@ -419,7 +419,7 @@ export class EnterpriseMenu {
         }
 
         this.tabItemFilter = {
-            title: svgFactory.createFilterSvg12(),
+            title: _.createIconNoSpan('filter12', this.gridOptionsWrapper, null, svgFactory.createFilterSvg12),
             body: filterWrapper.gui,
             afterAttachedCallback: afterFilterAttachedCallback
         };
@@ -436,7 +436,7 @@ export class EnterpriseMenu {
         eWrapperDiv.appendChild(this.columnSelectPanel.getGui());
 
         this.tabItemColumns = {
-            title: svgFactory.createColumnsSvg12(),//createColumnsIcon(),
+            title: _.createIconNoSpan('columns12', this.gridOptionsWrapper, null, svgFactory.createColumnsSvg12),//createColumnsIcon(),
             body: eWrapperDiv
         };
     }

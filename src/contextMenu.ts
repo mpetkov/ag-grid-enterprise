@@ -1,4 +1,5 @@
 import {
+    Utils as _,
     GetContextMenuItemsParams,
     GetContextMenuItems,
     SvgFactory,
@@ -104,14 +105,14 @@ class ContextMenu extends Component {
             copy: {
                 name: localeTextFunc('copy','Copy'),
                 shortcut: localeTextFunc('ctrlC','Ctrl+C'),
-                icon: svgFactory.createCopyIcon(),
+                icon: _.createIconNoSpan('copy', this.gridOptionsWrapper, null, svgFactory.createCopyIcon),
                 action: ()=> this.clipboardService.copyToClipboard()
             },
             paste: {
                 name: localeTextFunc('paste','Paste'),
                 shortcut: localeTextFunc('ctrlV','Ctrl+V'),
                 disabled: true,
-                icon: svgFactory.createPasteIcon(),
+                icon: _.createIconNoSpan('paste', this.gridOptionsWrapper, null, svgFactory.createPasteIcon),
                 action: ()=> this.clipboardService.pasteFromClipboard()
             },
             toolPanel: {

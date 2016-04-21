@@ -8,6 +8,7 @@ import {GridPanel} from "ag-grid/main";
 import {Column} from "ag-grid/main";
 import {PostConstruct} from "ag-grid/main";
 import {DragSource} from "ag-grid/main";
+import {GridOptionsWrapper} from "ag-grid/main";
 
 var svgFactory = SvgFactory.getInstance();
 
@@ -26,6 +27,7 @@ export class RenderedColumn extends RenderedItem {
     @Autowired('columnController') private columnController: ColumnController;
     @Autowired('dragAndDropService') private dragAndDropService: DragAndDropService;
     @Autowired('gridPanel') private gridPanel: GridPanel;
+    @Autowired('gridOptionsWrapper') gridOptionsWrapper: GridOptionsWrapper;
 
     private column: Column;
     private columnDept: number;
@@ -61,8 +63,8 @@ export class RenderedColumn extends RenderedItem {
         this.eColumnHiddenIcon = <HTMLInputElement> this.queryForHtmlElement('#eColumnHiddenIcon');
         this.eColumnVisibleIcon = <HTMLInputElement> this.queryForHtmlElement('#eColumnVisibleIcon');
 
-        this.eColumnHiddenIcon.appendChild(svgFactory.createColumnHiddenIcon());
-        this.eColumnVisibleIcon.appendChild(svgFactory.createColumnVisibleIcon());
+        this.eColumnHiddenIcon.appendChild(_.createIconNoSpan('columnHidden', this.gridOptionsWrapper, null, svgFactory.createColumnHiddenIcon));
+        this.eColumnVisibleIcon.appendChild(_.createIconNoSpan('columnVisible', this.gridOptionsWrapper, null, svgFactory.createColumnVisibleIcon));
 
         this.eColumnHiddenIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
         this.eColumnVisibleIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));

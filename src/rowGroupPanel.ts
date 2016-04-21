@@ -127,7 +127,7 @@ export class RowGroupPanel extends Component {
         if (this.columnController.getRowGroupColumns().length === 0) {
             // if no groupings, need to remove the empty message
             _.removeAllChildren(this.getGui());
-            var eGroupIcon = svgFactory.createGroupIcon();
+            var eGroupIcon = _.createIconNoSpan('group', this.gridOptionsWrapper, null, svgFactory.createGroupIcon);
             _.addCssClass(eGroupIcon, 'ag-faded');
             _.addCssClass(eGroupIcon, 'ag-row-group-icon');
             this.ePotentialDropGui.appendChild(eGroupIcon);
@@ -145,7 +145,7 @@ export class RowGroupPanel extends Component {
     }
 
     private addColumnsToGui(columns: Column[]): void {
-        var eGroupIcon = svgFactory.createGroupIcon();
+        var eGroupIcon = _.createIconNoSpan('group', this.gridOptionsWrapper, null, svgFactory.createGroupIcon);
         _.addCssClass(eGroupIcon, 'ag-row-group-icon');
         this.getGui().appendChild(eGroupIcon);
 
@@ -163,7 +163,7 @@ export class RowGroupPanel extends Component {
 
     private addEmptyMessageToGui(): void {
         // add in faded group icon
-        var eGroupIcon = svgFactory.createGroupIcon();
+        var eGroupIcon = _.createIconNoSpan('group', this.gridOptionsWrapper, null, svgFactory.createGroupIcon);
         _.addCssClass(eGroupIcon, 'ag-faded ag-row-group-icon');
         this.getGui().appendChild(eGroupIcon);
 

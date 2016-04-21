@@ -73,9 +73,9 @@ export class RenderedGroup extends RenderedItem {
         this.eGroupOpenedIcon = this.queryForHtmlElement('#eGroupOpenedIcon');
         this.eGroupOpenedArrow = this.queryForHtmlElement('#eGroupOpenedArrow');
 
-        this.eGroupClosedArrow.appendChild(svgFactory.createSmallArrowRightSvg());
+        this.eGroupClosedArrow.appendChild(_.createIcon('smallArrowRight', this.gridOptionsWrapper, null, svgFactory.createSmallArrowRightSvg));
         this.eGroupClosedIcon.appendChild(_.createIcon('columnSelectClosed', this.gridOptionsWrapper, null, svgFactory.createFolderClosed));
-        this.eGroupOpenedArrow.appendChild(svgFactory.createSmallArrowDownSvg());
+        this.eGroupOpenedArrow.appendChild(_.createIcon('smallArrowDown', this.gridOptionsWrapper, null, svgFactory.createSmallArrowDownSvg));
         this.eGroupOpenedIcon.appendChild(_.createIcon('columnSelectOpen', this.gridOptionsWrapper, null, svgFactory.createFolderOpen));
 
         this.eGroupClosedIcon.addEventListener('click', this.onExpandOrContractClicked.bind(this));
