@@ -357,16 +357,28 @@ export class EnterpriseMenu {
 
         var doingGrouping = this.columnController.getRowGroupColumns().length>0;
         var groupedByThisColumn = this.columnController.getRowGroupColumns().indexOf(this.column) >= 0;
+        var isSeaprator;
 
         result.push('separator');
-        result.push('pinSubMenu');
+        if (!this.column.getColDef().suppressPinSubMenu) {
+            result.push('pinSubMenu');
+            isSeaprator = true;
+        }
+
         if (doingGrouping && !this.column.getColDef().suppressAggregation) {
             result.push('valueAggSubMenu');
+            isSeaprator = true;
         }
-        result.push('separator');
-        result.push('autoSizeThis');
-        result.push('autoSizeAll');
-        result.push('separator');
+
+        if(isSeaprator) {
+            result.push('separator');
+        }
+
+        if (!this.column.getColDef().suppressAutoSize) {
+            result.push('autoSizeThis');
+            result.push('autoSizeAll');
+            result.push('separator');
+        }
 
         if (!this.column.getColDef().suppressRowGroup) {
             if (groupedByThisColumn) {
@@ -374,10 +386,14 @@ export class EnterpriseMenu {
             } else {
                 result.push('rowGroup');
             }
+            result.push('separator');
         }
-        result.push('separator');
+
         result.push('resetColumns');
-        result.push('toolPanel');
+
+        if (!this.column.getColDef().suppressToolPanel) {
+            result.push('toolPanel');
+        }
 
         // only add grouping expand/collapse if grouping
         if (doingGrouping) {
