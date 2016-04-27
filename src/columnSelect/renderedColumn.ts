@@ -45,7 +45,7 @@ export class RenderedColumn extends RenderedItem {
     public init(): void {
         var eText = <HTMLElement> this.queryForHtmlElement('#eText');
         eText.innerHTML = this.columnController.getDisplayNameForCol(this.column);
-        eText.addEventListener('dblclick', this.onColumnVisibilityChanged.bind(this));
+        eText.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
 
         this.setupVisibleIcons();
 
