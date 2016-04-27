@@ -47,7 +47,7 @@ export class RenderedColumn extends RenderedItem {
     public init(): void {
         var eText = <HTMLElement> this.queryForHtmlElement('#eText');
         eText.innerHTML = this.columnController.getDisplayNameForCol(this.column);
-        eText.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
+        eText.parentElement.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
 
         this.setupVisibleIcons();
 
@@ -66,8 +66,9 @@ export class RenderedColumn extends RenderedItem {
         this.eColumnHiddenIcon.appendChild(_.createIconNoSpan('columnHidden', this.gridOptionsWrapper, null, svgFactory.createColumnHiddenIcon));
         this.eColumnVisibleIcon.appendChild(_.createIconNoSpan('columnVisible', this.gridOptionsWrapper, null, svgFactory.createColumnVisibleIcon));
 
-        this.eColumnHiddenIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
-        this.eColumnVisibleIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
+        // Removed these lines because now the entire row is clickable
+        //this.eColumnHiddenIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
+        //this.eColumnVisibleIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
 
         var columnStateChangedListener = this.onColumnStateChangedListener.bind(this);
         this.column.addEventListener(Column.EVENT_VISIBLE_CHANGED, columnStateChangedListener);
