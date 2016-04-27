@@ -61,7 +61,7 @@ var SetFilterListItem = (function (_super) {
     ], SetFilterListItem.prototype, "gridOptionsWrapper", void 0);
     __decorate([
         main_1.Autowired('cellRendererService'), 
-        __metadata('design:type', main_1.CellRendererService)
+        __metadata('design:type', (typeof (_a = typeof main_1.CellRendererService !== 'undefined' && main_1.CellRendererService) === 'function' && _a) || Object)
     ], SetFilterListItem.prototype, "cellRendererService", void 0);
     __decorate([
         main_1.PostConstruct, 
@@ -70,5 +70,6 @@ var SetFilterListItem = (function (_super) {
         __metadata('design:returntype', void 0)
     ], SetFilterListItem.prototype, "init", null);
     return SetFilterListItem;
+    var _a;
 })(main_1.Component);
 exports.SetFilterListItem = SetFilterListItem;

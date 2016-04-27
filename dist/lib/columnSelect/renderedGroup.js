@@ -49,9 +49,9 @@ var RenderedGroup = (function (_super) {
         this.eGroupClosedArrow = this.queryForHtmlElement('#eGroupClosedArrow');
         this.eGroupOpenedIcon = this.queryForHtmlElement('#eGroupOpenedIcon');
         this.eGroupOpenedArrow = this.queryForHtmlElement('#eGroupOpenedArrow');
-        this.eGroupClosedArrow.appendChild(svgFactory.createSmallArrowRightSvg());
+        this.eGroupClosedArrow.appendChild(main_1.Utils.createIcon('smallArrowRight', this.gridOptionsWrapper, null, svgFactory.createSmallArrowRightSvg));
         this.eGroupClosedIcon.appendChild(main_1.Utils.createIcon('columnSelectClosed', this.gridOptionsWrapper, null, svgFactory.createFolderClosed));
-        this.eGroupOpenedArrow.appendChild(svgFactory.createSmallArrowDownSvg());
+        this.eGroupOpenedArrow.appendChild(main_1.Utils.createIcon('smallArrowDown', this.gridOptionsWrapper, null, svgFactory.createSmallArrowDownSvg));
         this.eGroupOpenedIcon.appendChild(main_1.Utils.createIcon('columnSelectOpen', this.gridOptionsWrapper, null, svgFactory.createFolderOpen));
         this.eGroupClosedIcon.addEventListener('click', this.onExpandOrContractClicked.bind(this));
         this.eGroupClosedArrow.addEventListener('click', this.onExpandOrContractClicked.bind(this));

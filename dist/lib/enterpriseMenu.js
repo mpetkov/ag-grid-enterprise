@@ -233,12 +233,12 @@ var EnterpriseMenu = (function () {
         var builtInMenuOptions = {
             pinSubMenu: {
                 name: localeTextFunc('pinColumn', 'Pin Column'),
-                icon: svgFactory.createPinIcon(),
+                icon: main_1.Utils.createIconNoSpan('pin', this.gridOptionsWrapper, null, svgFactory.createPinIcon),
                 childMenu: this.createPinnedSubMenu()
             },
             valueAggSubMenu: {
                 name: localeTextFunc('valueAggregation', 'Value Aggregation'),
-                icon: svgFactory.createAggregationIcon(),
+                icon: main_1.Utils.createIconNoSpan('aggregation', this.gridOptionsWrapper, null, svgFactory.createAggregationIcon),
                 childMenu: this.createAggregationSubMenu()
             },
             autoSizeThis: {
@@ -252,12 +252,12 @@ var EnterpriseMenu = (function () {
             rowGroup: {
                 name: localeTextFunc('groupBy', 'Group by') + ' ' + this.column.getColDef().headerName,
                 action: function () { return _this.columnController.addRowGroupColumn(_this.column); },
-                icon: svgFactory.createGroupIcon12()
+                icon: main_1.Utils.createIconNoSpan('group12', this.gridOptionsWrapper, null, svgFactory.createGroupIcon12)
             },
             rowUnGroup: {
                 name: localeTextFunc('ungroupBy', 'Un-Group by') + ' ' + this.column.getColDef().headerName,
                 action: function () { return _this.columnController.removeRowGroupColumn(_this.column); },
-                icon: svgFactory.createGroupIcon12()
+                icon: main_1.Utils.createIconNoSpan('group12', this.gridOptionsWrapper, null, svgFactory.createGroupIcon12)
             },
             resetColumns: {
                 name: localeTextFunc('resetColumns', 'Reset Columns'),
@@ -300,15 +300,24 @@ var EnterpriseMenu = (function () {
         var result = [];
         var doingGrouping = this.columnController.getRowGroupColumns().length > 0;
         var groupedByThisColumn = this.columnController.getRowGroupColumns().indexOf(this.column) >= 0;
+        var isSeaprator;
         result.push('separator');
-        result.push('pinSubMenu');
+        if (!this.column.getColDef().suppressPinSubMenu) {
+            result.push('pinSubMenu');
+            isSeaprator = true;
+        }
         if (doingGrouping && !this.column.getColDef().suppressAggregation) {
             result.push('valueAggSubMenu');
+            isSeaprator = true;
         }
-        result.push('separator');
-        result.push('autoSizeThis');
-        result.push('autoSizeAll');
-        result.push('separator');
+        if (isSeaprator) {
+            result.push('separator');
+        }
+        if (!this.column.getColDef().suppressAutoSize) {
+            result.push('autoSizeThis');
+            result.push('autoSizeAll');
+            result.push('separator');
+        }
         if (!this.column.getColDef().suppressRowGroup) {
             if (groupedByThisColumn) {
                 result.push('rowUnGroup');
@@ -316,10 +325,12 @@ var EnterpriseMenu = (function () {
             else {
                 result.push('rowGroup');
             }
+            result.push('separator');
         }
-        result.push('separator');
         result.push('resetColumns');
-        result.push('toolPanel');
+        if (!this.column.getColDef().suppressToolPanel) {
+            result.push('toolPanel');
+        }
         // only add grouping expand/collapse if grouping
         if (doingGrouping) {
             result.push('expandAll');
@@ -335,7 +346,7 @@ var EnterpriseMenu = (function () {
         this.mainMenuList.addMenuItems(menuItems, builtInOptions);
         this.mainMenuList.addEventListener(main_1.MenuItemComponent.EVENT_ITEM_SELECTED, this.onHidePopup.bind(this));
         this.tabItemGeneral = {
-            title: svgFactory.createMenuSvg(),
+            title: main_1.Utils.createIconNoSpan('menu', this.gridOptionsWrapper, null, svgFactory.createMenuSvg),
             body: this.mainMenuList.getGui()
         };
     };
@@ -349,7 +360,7 @@ var EnterpriseMenu = (function () {
             afterFilterAttachedCallback = filterWrapper.filter.afterGuiAttached.bind(filterWrapper.filter);
         }
         this.tabItemFilter = {
-            title: svgFactory.createFilterSvg12(),
+            title: main_1.Utils.createIconNoSpan('filter12', this.gridOptionsWrapper, null, svgFactory.createFilterSvg12),
             body: filterWrapper.gui,
             afterAttachedCallback: afterFilterAttachedCallback
         };
@@ -361,7 +372,7 @@ var EnterpriseMenu = (function () {
         this.context.wireBean(this.columnSelectPanel);
         eWrapperDiv.appendChild(this.columnSelectPanel.getGui());
         this.tabItemColumns = {
-            title: svgFactory.createColumnsSvg12(),
+            title: main_1.Utils.createIconNoSpan('columns12', this.gridOptionsWrapper, null, svgFactory.createColumnsSvg12),
             body: eWrapperDiv
         };
     };

@@ -93,14 +93,14 @@ var ContextMenu = (function (_super) {
             copy: {
                 name: localeTextFunc('copy', 'Copy'),
                 shortcut: localeTextFunc('ctrlC', 'Ctrl+C'),
-                icon: svgFactory.createCopyIcon(),
+                icon: main_1.Utils.createIconNoSpan('copy', this.gridOptionsWrapper, null, svgFactory.createCopyIcon),
                 action: function () { return _this.clipboardService.copyToClipboard(); }
             },
             paste: {
                 name: localeTextFunc('paste', 'Paste'),
                 shortcut: localeTextFunc('ctrlV', 'Ctrl+V'),
                 disabled: true,
-                icon: svgFactory.createPasteIcon(),
+                icon: main_1.Utils.createIconNoSpan('paste', this.gridOptionsWrapper, null, svgFactory.createPasteIcon),
                 action: function () { return _this.clipboardService.pasteFromClipboard(); }
             },
             toolPanel: {

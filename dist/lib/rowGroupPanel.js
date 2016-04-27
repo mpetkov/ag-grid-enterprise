@@ -110,7 +110,7 @@ var RowGroupPanel = (function (_super) {
         if (this.columnController.getRowGroupColumns().length === 0) {
             // if no groupings, need to remove the empty message
             main_1.Utils.removeAllChildren(this.getGui());
-            var eGroupIcon = svgFactory.createGroupIcon();
+            var eGroupIcon = main_1.Utils.createIconNoSpan('group', this.gridOptionsWrapper, null, svgFactory.createGroupIcon);
             main_1.Utils.addCssClass(eGroupIcon, 'ag-faded');
             main_1.Utils.addCssClass(eGroupIcon, 'ag-row-group-icon');
             this.ePotentialDropGui.appendChild(eGroupIcon);
@@ -128,7 +128,7 @@ var RowGroupPanel = (function (_super) {
     };
     RowGroupPanel.prototype.addColumnsToGui = function (columns) {
         var _this = this;
-        var eGroupIcon = svgFactory.createGroupIcon();
+        var eGroupIcon = main_1.Utils.createIconNoSpan('group', this.gridOptionsWrapper, null, svgFactory.createGroupIcon);
         main_1.Utils.addCssClass(eGroupIcon, 'ag-row-group-icon');
         this.getGui().appendChild(eGroupIcon);
         columns.forEach(function (column, index) {
@@ -144,7 +144,7 @@ var RowGroupPanel = (function (_super) {
     };
     RowGroupPanel.prototype.addEmptyMessageToGui = function () {
         // add in faded group icon
-        var eGroupIcon = svgFactory.createGroupIcon();
+        var eGroupIcon = main_1.Utils.createIconNoSpan('group', this.gridOptionsWrapper, null, svgFactory.createGroupIcon);
         main_1.Utils.addCssClass(eGroupIcon, 'ag-faded ag-row-group-icon');
         this.getGui().appendChild(eGroupIcon);
         // add in message

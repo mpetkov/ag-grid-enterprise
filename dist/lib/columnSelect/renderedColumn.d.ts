@@ -1,11 +1,13 @@
 // ag-grid-enterprise v4.1.2
 import { RenderedItem } from "./renderedItem";
 import { Column } from "ag-grid/main";
+import { GridOptionsWrapper } from "ag-grid/main";
 export declare class RenderedColumn extends RenderedItem {
     private static TEMPLATE;
     private columnController;
     private dragAndDropService;
     private gridPanel;
+    gridOptionsWrapper: GridOptionsWrapper;
     private column;
     private columnDept;
     private eColumnVisibleIcon;

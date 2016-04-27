@@ -22,6 +22,7 @@ var main_5 = require("ag-grid/main");
 var main_6 = require("ag-grid/main");
 var main_7 = require("ag-grid/main");
 var main_8 = require("ag-grid/main");
+var main_9 = require("ag-grid/main");
 var svgFactory = main_2.SvgFactory.getInstance();
 var RenderedColumn = (function (_super) {
     __extends(RenderedColumn, _super);
@@ -34,7 +35,7 @@ var RenderedColumn = (function (_super) {
     RenderedColumn.prototype.init = function () {
         var eText = this.queryForHtmlElement('#eText');
         eText.innerHTML = this.columnController.getDisplayNameForCol(this.column);
-        eText.addEventListener('dblclick', this.onColumnVisibilityChanged.bind(this));
+        eText.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
         this.setupVisibleIcons();
         var eIndent = this.queryForHtmlElement('#eIndent');
         eIndent.style.width = (this.columnDept * 10) + 'px';
@@ -46,8 +47,8 @@ var RenderedColumn = (function (_super) {
         var _this = this;
         this.eColumnHiddenIcon = this.queryForHtmlElement('#eColumnHiddenIcon');
         this.eColumnVisibleIcon = this.queryForHtmlElement('#eColumnVisibleIcon');
-        this.eColumnHiddenIcon.appendChild(svgFactory.createColumnHiddenIcon());
-        this.eColumnVisibleIcon.appendChild(svgFactory.createColumnVisibleIcon());
+        this.eColumnHiddenIcon.appendChild(main_1.Utils.createIconNoSpan('columnHidden', this.gridOptionsWrapper, null, svgFactory.createColumnHiddenIcon));
+        this.eColumnVisibleIcon.appendChild(main_1.Utils.createIconNoSpan('columnVisible', this.gridOptionsWrapper, null, svgFactory.createColumnVisibleIcon));
         this.eColumnHiddenIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
         this.eColumnVisibleIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
         var columnStateChangedListener = this.onColumnStateChangedListener.bind(this);
@@ -94,6 +95,10 @@ var RenderedColumn = (function (_super) {
         main_3.Autowired('gridPanel'), 
         __metadata('design:type', main_6.GridPanel)
     ], RenderedColumn.prototype, "gridPanel", void 0);
+    __decorate([
+        main_3.Autowired('gridOptionsWrapper'), 
+        __metadata('design:type', main_9.GridOptionsWrapper)
+    ], RenderedColumn.prototype, "gridOptionsWrapper", void 0);
     __decorate([
         main_8.PostConstruct, 
         __metadata('design:type', Function), 
