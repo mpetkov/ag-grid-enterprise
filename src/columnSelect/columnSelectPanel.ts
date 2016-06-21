@@ -11,7 +11,6 @@ import {
     Utils as _,
     OriginalColumnGroupChild
 } from "ag-grid/main";
-import {RenderedItem} from "./renderedItem";
 import {RenderedGroup} from "./renderedGroup";
 import {RenderedColumn} from "./renderedColumn";
 
@@ -23,12 +22,13 @@ export class ColumnSelectPanel extends Component {
 
     private static TEMPLATE = '<div class="ag-column-select-panel"></div>';
 
-    private renderedItems: {[key: string]: RenderedItem};
+    private renderedItems: {[key: string]: Component};
 
     private columnTree: OriginalColumnGroupChild[];
 
     private allowDragging: boolean;
 
+    // we allow dragging in the toolPanel, but not when this component appears in the column menu
     constructor(allowDragging: boolean) {
         super(ColumnSelectPanel.TEMPLATE);
         this.allowDragging = allowDragging;
@@ -56,7 +56,7 @@ export class ColumnSelectPanel extends Component {
     private destroyAllRenderedElements(): void {
         _.removeAllChildren(this.getGui());
         if (this.renderedItems) {
-            _.iterateObject(this.renderedItems, (key: string, renderedItem: RenderedItem) => renderedItem.destroy() );
+            _.iterateObject(this.renderedItems, (key: string, renderedItem: Component) => renderedItem.destroy() );
         }
         this.renderedItems = {};
     }
@@ -66,7 +66,7 @@ export class ColumnSelectPanel extends Component {
         var newDept: number;
 
         if (columnGroup.getColGroupDef()) {
-            var renderedGroup = new RenderedGroup(columnGroup, dept, this.onGroupExpanded.bind(this));
+            var renderedGroup = new RenderedGroup(columnGroup, dept, this.onGroupExpanded.bind(this), this.allowDragging);
             this.context.wireBean(renderedGroup);
             this.appendChild(renderedGroup.getGui());
             // we want to indent on the gui for the children

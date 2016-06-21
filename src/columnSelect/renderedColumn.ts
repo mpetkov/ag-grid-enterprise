@@ -1,18 +1,19 @@
-import {Utils as _} from "ag-grid/main";
-import {SvgFactory} from "ag-grid/main";
-import {RenderedItem} from "./renderedItem";
-import {Autowired} from "ag-grid/main";
-import {ColumnController} from "ag-grid/main";
-import {DragAndDropService} from "ag-grid/main";
-import {GridPanel} from "ag-grid/main";
-import {Column} from "ag-grid/main";
-import {PostConstruct} from "ag-grid/main";
-import {DragSource} from "ag-grid/main";
-import {GridOptionsWrapper} from "ag-grid/main";
+import {
+    Utils as _,
+    SvgFactory,
+    Autowired,
+    Component,
+    ColumnController,
+    DragAndDropService,
+    GridPanel,
+    Column,
+    PostConstruct,
+    DragSource
+} from "ag-grid/main";
 
 var svgFactory = SvgFactory.getInstance();
 
-export class RenderedColumn extends RenderedItem {
+export class RenderedColumn extends Component {
 
     private static TEMPLATE =
         '<div class="ag-column-select-column">' +
@@ -21,13 +22,12 @@ export class RenderedColumn extends RenderedItem {
         '    <span id="eColumnVisibleIcon" class="ag-column-visible-icon"></span>' +
         '    <span id="eColumnHiddenIcon" class="ag-column-hidden-icon"></span>' +
         '  </span>' +
-        '    <span id="eText" class="ag-column-select-label"></span>' +
+        '  <span id="eText" class="ag-column-select-label"></span>' +
         '</div>';
 
     @Autowired('columnController') private columnController: ColumnController;
     @Autowired('dragAndDropService') private dragAndDropService: DragAndDropService;
     @Autowired('gridPanel') private gridPanel: GridPanel;
-    @Autowired('gridOptionsWrapper') gridOptionsWrapper: GridOptionsWrapper;
 
     private column: Column;
     private columnDept: number;
@@ -35,6 +35,8 @@ export class RenderedColumn extends RenderedItem {
     private eColumnVisibleIcon: HTMLInputElement;
     private eColumnHiddenIcon: HTMLInputElement;
     private allowDragging: boolean;
+
+    private displayName: string;
 
     constructor(column: Column, columnDept: number, allowDragging: boolean) {
         super(RenderedColumn.TEMPLATE);
@@ -45,8 +47,9 @@ export class RenderedColumn extends RenderedItem {
 
     @PostConstruct
     public init(): void {
+        this.displayName = this.columnController.getDisplayNameForCol(this.column);
         var eText = <HTMLElement> this.queryForHtmlElement('#eText');
-        eText.innerHTML = this.columnController.getDisplayNameForCol(this.column);
+        eText.innerHTML = this.displayName;
         eText.addEventListener('dblclick', this.onColumnVisibilityChanged.bind(this));
 
         this.setupVisibleIcons();
@@ -63,8 +66,8 @@ export class RenderedColumn extends RenderedItem {
         this.eColumnHiddenIcon = <HTMLInputElement> this.queryForHtmlElement('#eColumnHiddenIcon');
         this.eColumnVisibleIcon = <HTMLInputElement> this.queryForHtmlElement('#eColumnVisibleIcon');
 
-        this.eColumnHiddenIcon.appendChild(_.createIconNoSpan('columnHidden', this.gridOptionsWrapper, null, svgFactory.createColumnHiddenIcon));
-        this.eColumnVisibleIcon.appendChild(_.createIconNoSpan('columnVisible', this.gridOptionsWrapper, null, svgFactory.createColumnVisibleIcon));
+        this.eColumnHiddenIcon.appendChild(svgFactory.createColumnHiddenIcon());
+        this.eColumnVisibleIcon.appendChild(svgFactory.createColumnVisibleIcon());
 
         this.eColumnHiddenIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
         this.eColumnVisibleIcon.addEventListener('click', this.onColumnVisibilityChanged.bind(this));
@@ -79,7 +82,8 @@ export class RenderedColumn extends RenderedItem {
     private addDragSource(): void {
         var dragSource: DragSource = {
             eElement: this.getGui(),
-            dragItem: this.column
+            dragItemName: this.displayName,
+            dragItem: [this.column]
         };
         this.dragAndDropService.addDragSource(dragSource);
     }
