@@ -147,9 +147,8 @@ var RichSelectCellEditor = (function (_super) {
     ], RichSelectCellEditor.prototype, "context", void 0);
     __decorate([
         main_1.Autowired('cellRendererService'), 
-        __metadata('design:type', (typeof (_a = typeof main_1.CellRendererService !== 'undefined' && main_1.CellRendererService) === 'function' && _a) || Object)
+        __metadata('design:type', main_1.CellRendererService)
     ], RichSelectCellEditor.prototype, "cellRendererService", void 0);
     return RichSelectCellEditor;
-    var _a;
 })(main_1.Component);
 exports.RichSelectCellEditor = RichSelectCellEditor;

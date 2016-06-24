@@ -29,9 +29,8 @@ var RichSelectRow = (function (_super) {
     };
     __decorate([
         main_1.Autowired('cellRendererService'), 
-        __metadata('design:type', (typeof (_a = typeof main_1.CellRendererService !== 'undefined' && main_1.CellRendererService) === 'function' && _a) || Object)
+        __metadata('design:type', main_1.CellRendererService)
     ], RichSelectRow.prototype, "cellRendererService", void 0);
     return RichSelectRow;
-    var _a;
 })(main_1.Component);
 exports.RichSelectRow = RichSelectRow;

@@ -25,7 +25,7 @@ var EnterpriseBoot = (function () {
     ], EnterpriseBoot.prototype, "filterManager", void 0);
     __decorate([
         main_1.Autowired('cellEditorFactory'), 
-        __metadata('design:type', (typeof (_a = typeof main_1.CellEditorFactory !== 'undefined' && main_1.CellEditorFactory) === 'function' && _a) || Object)
+        __metadata('design:type', main_1.CellEditorFactory)
     ], EnterpriseBoot.prototype, "cellEditorFactory", void 0);
     __decorate([
         main_1.PostConstruct, 
@@ -38,6 +38,5 @@ var EnterpriseBoot = (function () {
         __metadata('design:paramtypes', [])
     ], EnterpriseBoot);
     return EnterpriseBoot;
-    var _a;
 })();
 exports.EnterpriseBoot = EnterpriseBoot;
